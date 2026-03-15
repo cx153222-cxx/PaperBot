@@ -1,4 +1,4 @@
-import arxiv_fetch
+import arxiv
 
 def get_arxiv_papers(query="cs.IR", limit=5):
     search = arxiv.Search(
