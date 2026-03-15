@@ -1,0 +1,32 @@
+name: arxiv-daily
+
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: setup python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+
+    - name: install deps
+      run: |
+        pip install -r requirements.txt
+
+    - name: run script
+      env:
+        FEISHU_URL: ${{ secrets.FEISHU_URL }}
+        DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      run: |
+        python arxiv.py
