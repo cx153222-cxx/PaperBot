@@ -7,14 +7,13 @@ def build_report():
     report = "📚 Arxiv Daily - cs.IR\n\n"
     for i, paper in enumerate(papers):
         summary = summarize(paper["summary"])
-        report += f"""
-{i+1}. {paper["title"]} 
-总结:
-{summary}
-链接:
-{paper["url"]}
------------------
-"""
+        # 使用 \n 进行换行，这样代码可以保持整齐的缩进，输出也不会有前置空格
+        report += f"{i+1}. {paper['title']}\n"
+        report += "总结:\n"
+        report += f"{summary}\n"
+        report += "链接:\n"
+        report += f"{paper['url']}\n"
+        report += "-----------------\n\n"
 
     return report
 
