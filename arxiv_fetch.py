@@ -1,6 +1,8 @@
 import arxiv
 
-def get_arxiv_papers(query="cs.IR", limit=10):
+qu = '(cat:cs.NE OR cat:math.OC OR cat:cs.LG) AND (all:"surrogate-assisted" OR all:"Kriging" OR all:"black-box optimization")'
+
+def get_arxiv_papers(query=qu, limit=10):
     search = arxiv.Search(
         query=query,
         max_results=limit,
