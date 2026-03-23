@@ -15,7 +15,7 @@ def build_report():
         report += f"{result}\n"  # 直接贴上大模型返回的结构化文本（含中文标题和总结）
         report += "链接:\n"
         report += f"{paper['url']}\n"
-        report += "-----------------\n\n"
+        report += "----------------------\n\n"
 
     return report
 
