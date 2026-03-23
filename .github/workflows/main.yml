@@ -29,4 +29,4 @@ jobs:
         FEISHU_URL: ${{ secrets.FEISHU_URL }}
         ZHIPU_API_KEY: ${{ secrets.API_KEY }}
       run: |
-        python arxiv.py
+        python main.py
