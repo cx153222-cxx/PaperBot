@@ -24,6 +24,15 @@ jobs:
       run: |
         pip install -r requirements.txt 
 
+    # 【新增】用来测试 GitHub 有没有成功把 Secrets 取出来
+    - name: Debug Secrets
+      env:
+        TEST_API: ${{ secrets.API_KEY }}
+        TEST_FEISHU: ${{ secrets.FEISHU_URL }}
+      run: |
+        if [ -z "$TEST_API" ]; then echo "API_KEY 没读到，是个空的！"; else echo "API_KEY 已经成功读取！"; fi
+        if [ -z "$TEST_FEISHU" ]; then echo "FEISHU_URL 没读到，是个空的！"; else echo "FEISHU_URL 已经成功读取！"; fi
+
     - name: run script
       env:
         FEISHU_URL: ${{ secrets.FEISHU_URL }}
