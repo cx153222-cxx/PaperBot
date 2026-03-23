@@ -28,5 +28,15 @@ def summarize(text):
 
     r = requests.post(url, headers=headers, json=payload)
     
-    # 解析并返回结果
-    return r.json()["choices"][0]["message"]["content"]
+    # 【新增代码】检查响应状态，如果不是成功返回，打印出详细错误
+    if r.status_code != 200:
+        print(f"请求智谱 API 失败！状态码: {r.status_code}")
+        print(f"错误详情: {r.text}")
+        return f"摘要生成失败 (API Error: {r.status_code})"
+    
+    # 尝试解析，如果仍然没有 choices 字段，也打印出实际内容
+    try:
+        return r.json()["choices"][0]["message"]["content"]
+    except KeyError:
+        print(f"解析结果失败，API 实际返回了: {r.text}")
+        return "摘要格式解析失败"
