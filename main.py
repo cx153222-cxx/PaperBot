@@ -9,12 +9,12 @@ def build_report():
         summary = summarize(paper["summary"])
         report += f"""
             {i+1}. {paper["title"]} 
-            总结:
-            {summary}
-            链接:
-            {paper["url"]}
-            -----------------
-            """
+总结:
+{summary}
+链接:
+{paper["url"]}
+-----------------
+"""
 
     return report
 
