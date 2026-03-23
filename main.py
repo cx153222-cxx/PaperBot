@@ -5,12 +5,14 @@ from feishu import send_feishu
 def build_report():
     papers = get_arxiv_papers()
     report = "📚 Arxiv Daily - cs.IR\n\n"
+    
     for i, paper in enumerate(papers):
-        summary = summarize(paper["summary"])
-        # 使用 \n 进行换行，这样代码可以保持整齐的缩进，输出也不会有前置空格
+        # 现在同时把标题和摘要传给大模型
+        result = summarize(paper["title"], paper["summary"])
+        
+        # 拼接最终的文本
         report += f"{i+1}. {paper['title']}\n"
-        report += "总结:\n"
-        report += f"{summary}\n"
+        report += f"{result}\n"  # 直接贴上大模型返回的结构化文本（含中文标题和总结）
         report += "链接:\n"
         report += f"{paper['url']}\n"
         report += "-----------------\n\n"
