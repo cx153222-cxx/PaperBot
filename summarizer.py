@@ -13,30 +13,29 @@ def summarize(text):
         "Content-Type": "application/json"
     }
 
-    payload = {
-        "model": "glm-4-flash", # 使用免费的模型
+   payload = {
+        "model": "glm-4-flash", 
         "messages": [
             {"role": "user", "content": f"""
-             请将以下英文论文摘要提炼为适合在工作群内阅读的中文快讯。要求：\n
-             1. 语言直白凝练，不要使用过于生涩的长句。\n
-             2. 直接点明这篇论文的最大创新点和应用价值。\n
-             3. 总字数严格控制在 200 字以内，分两到三句话输出。\n\n
-             摘要原文：\n{text}"""
+作为一位资深计算机科学研究员，请阅读以下英文论文摘要，并严格按照规定的格式，提炼出一份高质量的中文学术快讯。
+
+【内容要求】
+1. 语言需高度精炼、专业直白，拒绝废话。
+2. 必须精准捕捉模型、算法或系统的具体细节。
+3. 突出与传统基线(Baseline)或以往方法的差异。
+4. 总字数严格控制在 250 字以内。
+
+【严格输出格式】
+📌 主要内容：[用一句话概括论文研究的特定场景或试图解决的核心痛点]
+💡 核心创新：[用一到两句话具体说明提出的新模型架构、算法机制或理论框架]
+🚀 优势与突破：[明确对比以往方案，指出该创新在性能、效率、成本或机制上带来的颠覆性区别和具体优势]
+
+摘要原文：
+{text}"""
             }
         ]
     }
 
     r = requests.post(url, headers=headers, json=payload)
-    
-    # 【新增代码】检查响应状态，如果不是成功返回，打印出详细错误
-    if r.status_code != 200:
-        print(f"请求智谱 API 失败！状态码: {r.status_code}")
-        print(f"错误详情: {r.text}")
-        return f"摘要生成失败 (API Error: {r.status_code})"
-    
-    # 尝试解析，如果仍然没有 choices 字段，也打印出实际内容
-    try:
-        return r.json()["choices"][0]["message"]["content"]
-    except KeyError:
-        print(f"解析结果失败，API 实际返回了: {r.text}")
-        return "摘要格式解析失败"
+
+    return r.json()["choices"][0]["message"]["content"]
