@@ -2,7 +2,7 @@ import requests
 import os
 
 # 获取我们在 GitHub Secrets 中新配置的环境变量
-ZHIPU_API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("API_KEY")
 
 def summarize(text):
     # 智谱的 API 端点
