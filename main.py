@@ -8,7 +8,7 @@ def build_report():
     for i, paper in enumerate(papers):
         summary = summarize(paper["summary"])
         report += f"""
-            {i+1}. {paper["title"]} 
+{i+1}. {paper["title"]} 
 总结:
 {summary}
 链接:
