@@ -27,6 +27,6 @@ jobs:
     - name: run script
       env:
         FEISHU_URL: ${{ secrets.FEISHU_URL }}
-        ZHIPU_API_KEY: ${{ secrets.API_KEY }}
+        API_KEY: ${{ secrets.API_KEY }}
       run: |
         python main.py
