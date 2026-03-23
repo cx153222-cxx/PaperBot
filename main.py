@@ -4,7 +4,7 @@ from feishu import send_feishu
 
 def build_report():
     papers = get_arxiv_papers()
-    report = "📚 Arxiv Daily - cs.IR\n\n"
+    report = "📚 Arxiv Daily - Optimization\n\n"
     
     for i, paper in enumerate(papers):
         # 现在同时把标题和摘要传给大模型
