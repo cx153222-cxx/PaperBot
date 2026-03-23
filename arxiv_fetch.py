@@ -1,6 +1,6 @@
 import arxiv
 
-def get_arxiv_papers(query="cs.IR", limit=5):
+def get_arxiv_papers(query="cs.IR", limit=10):
     search = arxiv.Search(
         query=query,
         max_results=limit,
