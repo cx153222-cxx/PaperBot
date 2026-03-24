@@ -1,4 +1,5 @@
 import arxiv
+import os
 
 # qu = '(cat:cs.NE OR cat:math.OC OR cat:cs.LG) AND (all:"surrogate-assisted" OR all:"Kriging" OR all:"black-box optimization")'
 CURRENT_QUERY = os.getenv("ARXIV_QUERY", "cs.IR")
