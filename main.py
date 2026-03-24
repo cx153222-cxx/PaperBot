@@ -1,10 +1,14 @@
+import os
 from arxiv_fetch import get_arxiv_papers
 from summarizer import summarize
 from feishu import send_feishu
 
+# 读取环境变量 ID 作为日报标题，如果没有则默认叫 "cs.IR"
+ID = os.getenv("ID", "cs.IR")
+
 def build_report():
     papers = get_arxiv_papers()
-    report = "📚 Arxiv Daily - Optimization\n\n"
+    report = f"📚 Arxiv Daily - {ID}\n\n"
     
     for i, paper in enumerate(papers):
         # 现在同时把标题和摘要传给大模型
@@ -18,7 +22,6 @@ def build_report():
         report += "----------------------\n\n"
 
     return report
-
 
 if __name__ == "__main__":
     report = build_report()
