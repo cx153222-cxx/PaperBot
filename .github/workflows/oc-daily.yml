@@ -1,0 +1,24 @@
+name: arxiv-oc-daily
+
+on:
+  schedule:
+    - cron: '15 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.8'
+    - run: pip install -r requirements.txt 
+    - name: run script
+      env:
+        FEISHU_URL: ${{ secrets.FEISHU_URL }}
+        API_KEY: ${{ secrets.API_KEY }}
+        # 这里注入复杂黑盒优化与代理模型的专属查询词
+        ARXIV_QUERY: '(cat:cs.NE OR cat:math.OC OR cat:cs.LG) AND (all:"surrogate-assisted" OR all:"Kriging" OR all:"black-box optimization")'
+        ID: '进化优化'
+      run: python main.py
