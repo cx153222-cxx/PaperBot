@@ -1,10 +1,10 @@
 import arxiv
 import os
 
-# qu = '(cat:cs.NE OR cat:math.OC OR cat:cs.LG) AND (all:"surrogate-assisted" OR all:"Kriging" OR all:"black-box optimization")'
+# 优先读取环境变量 ARXIV_QUERY，如果没有设置，则默认搜索 "cs.IR"
 CURRENT_QUERY = os.getenv("ARXIV_QUERY", "cs.IR")
 
-def get_arxiv_papers(query=qu, limit=7):
+def get_arxiv_papers(query=CURRENT_QUERY, limit=5):
     search = arxiv.Search(
         query=query,
         max_results=limit,
