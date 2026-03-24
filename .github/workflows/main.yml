@@ -38,6 +38,6 @@ jobs:
         FEISHU_URL: ${{ secrets.FEISHU_URL }}
         API_KEY: ${{ secrets.API_KEY }}
         ARXIV_QUERY: 'cs.IR'
-        ID: 'CS.IR'
+        ID: '信息检索 (cs.IR)'
       run: |
         python main.py
