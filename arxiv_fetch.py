@@ -1,10 +1,8 @@
 import arxiv
-import os
+import time
 
-# 优先读取环境变量 ARXIV_QUERY，如果没有设置，则默认搜索 "cs.IR"
-CURRENT_QUERY = os.getenv("ARXIV_QUERY", "cs.IR")
+def get_arxiv_papers(query="cs.IR", limit=5):
 
-def get_arxiv_papers(query=CURRENT_QUERY, limit=5):
     search = arxiv.Search(
         query=query,
         max_results=limit,
@@ -13,11 +11,17 @@ def get_arxiv_papers(query=CURRENT_QUERY, limit=5):
 
     papers = []
 
-    for result in search.results():
-        papers.append({
-            "title": result.title,
-            "summary": result.summary,
-            "url": result.entry_id
-        })
+    try:
+        for result in search.results():
+            papers.append({
+                "title": result.title,
+                "summary": result.summary,
+                "url": result.entry_id
+            })
+
+            time.sleep(1)  # 防止限流
+
+    except Exception as e:
+        print("arxiv error:", e)
 
     return papers
